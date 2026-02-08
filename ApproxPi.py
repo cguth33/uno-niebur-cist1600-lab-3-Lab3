@@ -1,26 +1,35 @@
-#ApproxPi.py
-#Name:
-#Date:
-#Assignment:
+# Name: Carter Guthrie
+# Date: 2/8/2025
+# Assignment: Lab 3
+# Purpose: Approximate Pi using a series and measure time
+
 import math
 import time
 
-
-#PLEASE NOTE - This is an optional, extra credit portion of the lab.
-
 def main():
-  realPi = math.pi
-
-  #ask user for decimal percision (up to 10)
-
-  start = time.time()
-  #calculate pi using the approximation technique
-  #Loop until the level of percision is reached
-
-  end = time.time()
-
-  elapsedTime = end - start
-  print(elapsedTime)
+    realPi = math.pi
+    
+    # Ask user for decimal precision (limit iterations for speed)
+    precision = int(input("How many iterations for the series? (e.g., 1000000): "))
+    
+    start = time.time()
+    
+    # Calculate pi using the Gregory-Leibniz series
+    my_pi = 0
+    denominator = 1
+    for i in range(precision):
+        if i % 2 == 0:
+            my_pi += 4 / denominator
+        else:
+            my_pi -= 4 / denominator
+        denominator += 2
+        
+    end = time.time()
+    
+    elapsedTime = end - start
+    print(f"Approximated Pi: {my_pi}")
+    print(f"Difference from math.pi: {abs(realPi - my_pi)}")
+    print(f"Time taken: {elapsedTime} seconds")
 
 if __name__ == '__main__':
-  main()
+    main()
